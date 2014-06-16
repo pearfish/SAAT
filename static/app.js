@@ -30,5 +30,6 @@ angular.module('SAATapp', [
 		*/		
 		.otherwise({
 			redirectTo: '/'
-		});
+		})
+	; // end routeprovider
 });
