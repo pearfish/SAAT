@@ -27,7 +27,7 @@ angular.module('SAATapp')
 			; // end http
 		}
 	})
-	.controller('FormCtrl', function($scope, $http) {
+	.controller('CreateCtrl', function($scope, $http) {
 		var message = "quack";
 		$scope.message = message;
 		
@@ -56,7 +56,21 @@ angular.module('SAATapp')
 		};
 		
 	}) // end FormCtrl
-	.controller('SrsCtrl', function($scope) {
+	.controller('EditCtrl', function($scope) {
+		
 	})
 	
 ; // end module
+
+
+/*
+example alternate markup
+var ctrl = [ '$scope', 'Book', function( scope, Book ) {
+	scope.$on( 'books.update', function( event ) {
+		scope.books = Book.books;
+	});
+	scope.books = Book.books;
+}];
+ 
+module.controller( "books.list", ctrl );
+*/

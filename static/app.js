@@ -12,22 +12,14 @@ angular.module('SAATapp', [
 			templateUrl: 'partials/boringTemplate.html',
 			controller: 'BoringCtrl'
 		})
-		.when('/form', {
-			templateUrl: 'partials/formTemplate.html',
-			controller: 'FormCtrl'
+		.when('/create', {
+			templateUrl: 'partials/createTemplate.html',
+			controller: 'CreateCtrl'
 		})
-		.when('/srsbsns', {
-			templateUrl: 'partials/srsbsns.html',
-			controller: 'SrsCtrl'
+		.when('/edit:pid', {
+			templateUrl: 'partials/editTemplate.html',
+			controller: 'EditCtrl'
 		})
-		/*
-		.when('/createPromotion', {
-
-		})
-		.when('/editPromotion:promoID', {
-
-		})
-		*/		
 		.otherwise({
 			redirectTo: '/'
 		})
