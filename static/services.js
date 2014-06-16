@@ -34,10 +34,8 @@ var promoService = angular.module('SAATapp')
             };
             
             this.getPromoById = function( id ) {
-                var promos = promos;
                 for( var i=0 ; i < promos.length ; i++ ){
-                    console.log(promos.pid, id);
-                    if ( promos.pid == id ) {
+                    if ( promos[i].pid == id ) {
                         return promos[i];
                     }
                 }

@@ -1,0 +1,19 @@
+<div>
+	<button type="button" class="btn btn-primary" ng-click="getPromoData()">populate promo data(demo merchant)</button>
+	<input type="text" ng-model="mid"><button type="button" class="btn btn-primary" ng-click="getSpecificPromoData()">populate promo data</button>
+	
+	<label>filter by name <input type="text" ng-model="testFilter.name"/></label>
+	<label>filter by promoid<input type="text" ng-model="testFilter.pid"/></label>
+	<table class="table table-striped" style="text-align:left">
+		<tr>	
+			<th ng-repeat="(key, value) in promos[0]"> {{key}} </th> 
+		</tr>
+		
+		<tr ng-repeat="promo in promos | filter: testFilter">	
+			<td ng-repeat="(key, value) in promo"> {{value}} </td>
+			<td><a ng-href="#edit/{{promo.pid}}">edit</a></td>
+		</tr>
+	</table>
+	<h4> raw data in $scope.promos:</h4>
+	<p style="width: 500px"> {{promos}} </p>
+</div>
