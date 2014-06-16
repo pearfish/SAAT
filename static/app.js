@@ -8,15 +8,15 @@ angular.module('SAATapp', [
 			templateUrl: 'partials/main.html'
 			//main is boring, has no controller
 		})
-		.when('/boring', {
-			templateUrl: 'partials/boringTemplate.html',
-			controller: 'BoringCtrl'
+		.when('/view', {
+			templateUrl: 'partials/viewTemplate.html',
+			controller: 'ViewCtrl'
 		})
 		.when('/create', {
 			templateUrl: 'partials/createTemplate.html',
 			controller: 'CreateCtrl'
 		})
-		.when('/edit:pid', {
+		.when('/edit/:pid', {
 			templateUrl: 'partials/editTemplate.html',
 			controller: 'EditCtrl'
 		})
@@ -24,4 +24,7 @@ angular.module('SAATapp', [
 			redirectTo: '/'
 		})
 	; // end routeprovider
+})
+.run( function (PromoService) {
+	PromoService.syncPromos();	
 });
