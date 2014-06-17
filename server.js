@@ -89,7 +89,25 @@ console.log('server connection closed');
 /* NEW API */
 
 app.post('/newPromo', function(req, res){
-    //TODO
+	console.log('/newPromo called');
+	var tempPromo = {
+		mid: req.body.mid,
+		name: req.body.name,
+		desc: req.body.desc,
+		cid: req.body.cid,
+		goLive: req.body.goLive,
+		endTime: req.body.endTime
+	};
+	
+	if( tempPromo.mid == undefined || tempPromo.name == undefined ) {
+		console.log('new promo failed');
+		res.status(400).send("mid, pid, and name are required");
+	} else {
+		tempPromo.pid=localPromos.promoCount++;
+		localPromos.promos.push(tempPromo);
+		console.log(tempPromo);
+		res.status(200).json(tempPromo);
+	}
 });
 
 app.put('/editPromo', function(req, res){
@@ -99,14 +117,14 @@ app.put('/editPromo', function(req, res){
 });
 
 app.get('/getAllPromos', function(req, res){
-        console.log("/promos called");
+        console.log("/getAllPromos called");
 	
 	res.setHeader('Content-Type', 'application/json');
 	res.status(200).json(localPromos.promos);
 });
 
 app.get('/getOnePromo', function(req, res){
-	console.log("/promos called");
+	console.log("/getOnePromo called");
 	
 	//PLACEHOLDER THING, TODO: GRAB REAL REQUEST PARAM
 	var reqPid = 10000293; //req.param.pid;
@@ -142,6 +160,8 @@ app.get('/getQuote', function(req, res){
 	res.status(200).json(quote);
 });
 
+
+
 /* END NEW API */
 
 
@@ -156,30 +176,7 @@ app.get('/specificPromos/:mid', function(req, res, next){
 	res.status(400).send('TODO');
 });
 
-app.post('/newPromo', function(req, res, next){
-	console.log('/newPromo added');
-	console.log(req);
-	var tempPromo = {
-		mid: req.body.mid,
-		name: req.body.name,
-		desc: req.body.desc,
-		cid: req.body.cid,
-		goLive: req.body.goLive,
-		endTime: req.body.endTime
-	};
-	
-	console.log(tempPromo);
-	
-	if( tempPromo.mid == undefined || tempPromo.name == undefined ) {
-		console.log('new promo failed');
-		res.status(400).send("mid, pid, and name are required");
-	} else {
-		tempPromo.pid=promoCount++;
-		localPromos.promos.push(tempPromo);
-		console.log("new promotion added");
-		res.status(200).send('promotion added');
-	}
-});
+
 
 /* END OLD API */
 

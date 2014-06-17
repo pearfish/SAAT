@@ -1,6 +1,8 @@
 angular.module('SAATapp')
 	.controller('ViewCtrl', ['$scope', 'PromoService', function($scope, PromoService) {
+		$scope.promos = PromoService.getPromos();
 		$scope.getPromoData = function() {
+			PromoService.syncPromos();
 			$scope.promos = PromoService.getPromos();
 		}
 		$scope.getSpecificPromoData = function(queryI) {
@@ -10,7 +12,8 @@ angular.module('SAATapp')
 	.controller('CreateCtrl', ['$scope', 'PromoService', function($scope, PromoService) {
 		$scope.submitForm = function(isValid) {
 			if (isValid) {
-				PromoService.addPromo("PLACEHOLDER");
+				console.log($scope.promoData);
+				PromoService.addPromo($scope.promoData);
 			} else {
 				alert('woah no ways, form is invalid');
 				console.log($scope.promoForm);

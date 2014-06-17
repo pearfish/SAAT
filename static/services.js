@@ -1,6 +1,6 @@
 var promoService = angular.module('SAATapp')
-    .service( 'PromoService', [ '$rootScope', '$http', '$q',
-        function( $rootScope, $http, q ) {
+    .service( 'PromoService', [ '$rootScope', '$http', '$q', '$location',
+        function( $rootScope, $http, q, location ) {
             var promos = [];
                         
             this.syncPromos = function(){
@@ -18,47 +18,34 @@ var promoService = angular.module('SAATapp')
             
             this.addPromo = function ( promo ) {
                 console.log('promoService.addPromo() called');
-                var TESTPROMO = {
-                    mid: 1000999,
-                    name: 'TESTPROMO',
-                    desc: 'THIS IS A TEST',
-                    cid: 1000999,
-                    goLive: '06891290',
-                    endTime: '06891290'    
-                };
 
-                var promise = this.postNewPromo(TESTPROMO);
-                promise.then(function(status){
-                    console.log(status);
-                    switch(status){
-                        case 200:
-                            promoService.promos.push( TESTPROMO );
-                            $rootScope.$broadcast( 'promos.update' );
-                            break;
-                        default:
-                            console.log('you got server problems');
+                var promise = this.postNewPromo( promo );
+                promise.then(function(result){
+                    if (result != false) {
+                        promos.push(result);
+                        alert('program added succesfully');
+                        $location.path('/view');
+                    } else {
+                        alert('oh jeez adding new promo failed');
                     }
                 });
-                
             }; 
             
             this.postNewPromo = function ( promo ) {
-                console.log("managed to get to postNewPromo")
-                var deferred = q.defer(),
-                    scope = this;   
+                console.log(promo);
+                var deferred = q.defer();   
                 
                 $http({   
                     method: 'POST',
                     url: '/newPromo',
-                    data: promo,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    data: promo
                 }) 
                     .success( function(data, status, headers, config) {
                         deferred.resolve(data);
                     })
                     .error( function(data, status, headers, config) {
-                        console.log(status);
-                        deferred.reject(status);
+                        console.log('post promo failed', status);
+                        deferred.reject(false);
                     }); // end http
                 
                 return deferred.promise;

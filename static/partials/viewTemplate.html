@@ -1,7 +1,10 @@
 <div>
-	<button type="button" class="btn btn-primary" ng-click="getPromoData()">populate promo data(demo merchant)</button>
-	<input type="text" ng-model="queryMid"/>
-	<button type="button" class="btn btn-primary" ng-click="getSpecificPromoData(midQuery)">populate promo data</button>
+	<button type="button" class="tiny button" ng-click="getPromoData()">populate all promo data</button>
+	
+	<!--
+	<input type="text" style="width: 200px; float: right" ng-model="queryMid" placeholder="mid"/>
+	<button type="button" style="float: right" class="tiny button" ng-click="getSpecificPromoData(midQuery)">populate promo data</button>
+	-->
 	
 	<label>filter by name <input type="text" ng-model="testFilter.name"/></label>
 	<label>filter by promoid<input type="text" ng-model="testFilter.pid"/></label>
