@@ -2,28 +2,9 @@ angular.module('SAATapp')
 	.controller('ViewCtrl', ['$scope', 'PromoService', function($scope, PromoService) {
 		$scope.getPromoData = function() {
 			$scope.promos = PromoService.getPromos();
-			/*
-			$http({ method: 'GET', url: '/promos'}) 
-				.success( function(data, status, headers, config) {
-					$scope.promos = data;
-				})
-				.error( function(data, status, headers, config) {
-					alert('Woah! getPromoData failed!');
-					console.log(data, status);
-				})
-			; // end http
-			*/
 		}
-		$scope.getSpecificPromoData = function() {
-			$http({ method: 'GET', url: '/specificPromos?mid='+$scope.mid}) 
-				.success( function(data, status, headers, config) {
-					$scope.promos = data;
-				})
-				.error( function(data, status, headers, config) {
-					alert('Woah! getPromoData failed!');
-					console.log(data, status);
-				})
-			; // end http
+		$scope.getSpecificPromoData = function(queryI) {
+			$scope.promos = PromoService.getPromos();
 		}
 	}])
 	.controller('CreateCtrl', function($scope, $http) {

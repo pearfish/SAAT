@@ -34,16 +34,21 @@ var promoService = angular.module('SAATapp')
             };
             
             this.getPromoById = function( id ) {
+                var result = {}
                 for( var i=0 ; i < promos.length ; i++ ){
                     if ( promos[i].pid == id ) {
-                        return promos[i];
+                        result = promos[i];
                     }
                 }
-                return false;
+                return result;
             };
             
             this.getPromoByIndex = function(index){
-                return promos[index];
+                if (promos[index].typeOf != undefined) {
+                    return promos[index];
+                } else {
+                    return false;
+                }
             };
             
             /*
