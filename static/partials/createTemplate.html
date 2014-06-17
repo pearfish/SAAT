@@ -3,47 +3,49 @@
 
 <!-- FORM -->
 <!-- pass in the variable if our form is valid or invalid -->
-<form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+<form name="promoForm" ng-submit="submitForm(promoForm.$valid)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
 
 	<!-- NAME -->
-	<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+	<div ng-class="{ 'has-error' : promoForm.name.$invalid && !promoForm.name.$pristine }">
 		<label>Name (required)</label>
-		<input type="text" name="name" id="name" class="form-control" ng-model="promoData.name" required>
-		<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+		<input type="text" name="name" id="name" ng-model="promoData.name" ng-required="true">
+		<small ng-show="promoForm.name.$invalid && !promoForm.name.$pristine" class="error">promo name is required.</small>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error' : userForm.mid.$invalid && !userForm.mid.$pristine }">
+	<div ng-class="{ 'has-error' : promoForm.mid.$invalid && !promoForm.mid.$pristine }">
 		<label>Merchant ID (required)</label>
-		<input type="number" name="mid" id="mid" class="form-control" ng-model="promoData.mid" ng-minlength="8" ng-maxlength="8">
-		<p ng-show="userForm.mid.$error.minlength" class="help-block">Merchant ID is too short.</p>
-		<p ng-show="userForm.mid.$error.maxlength" class="help-block">Merchant ID is too long.</p>
+		<input type="text" name="mid" id="mid" ng-model="promoData.mid" ng-minlength="8" ng-required="true">
+		<small ng-show="promoForm.mid.$error.minlength" class="error">Merchant ID is too short.</small>
 	</div>
 	
-	<div class="form-group">	
+	<div>	
 		<label>Description</label>
-		<input type="text" name="desc" id="desc" class="form-control" ng-model="promoData.desc">
+		<input type="text" name="desc" id="desc" ng-model="promoData.desc">
 	</div>
-	<div class="form-group">	
+	
+	<div>	
 		<label>Creative ID</label>
-		<input type="number" name="cid" id="cid" class="form-control" ng-model="promoData.cid">
+		<input type="text" name="cid" id="cid" ng-model="promoData.cid">
 	</div>
-        <div class="form-group">	
+	
+        <div>	
 		<label>Go Live Date</label>
-		<input type="date" name="desc" id="desc" class="form-control" ng-model="promoData.goLive">
+		<input type="date" name="desc" id="desc" ng-model="promoData.goLive">
 	</div>
-        <div class="form-group">	
+	
+        <div>	
 		<label>End Time</label>
-		<input type="date" name="endTime" id="endTime" class="form-control" ng-model="promoData.endTime">
+		<input type="date" name="endTime" id="endTime" ng-model="promoData.endTime">
 	</div>
 	
 	<!-- SUBMIT BUTTON -->
-	<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+	<button type="submit" class="btn btn-primary">Submit</button>
 	
 </form>
 
 <!--
-{{ (userForm.name.$error==false) + (userForm.username.$error==false)+ (userForm.email.$error==false)   }}
-{{ keys(userForm.$error) }}
+{{ (promoData.name.$error==false) + (promoData.username.$error==false)+ (promoData.email.$error==false)   }}
+{{ keys(promoData.$error) }}
 
 <div class="nice round success alert large-10">
 	<span class="meter" style="width: 30%"></span>

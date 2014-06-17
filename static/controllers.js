@@ -7,34 +7,17 @@ angular.module('SAATapp')
 			$scope.promos = PromoService.getPromos();
 		}
 	}])
-	.controller('CreateCtrl', function($scope, $http) {
-		var message = "quack";
-		$scope.message = message;
-		
-		$scope.submitNewPromo = function(){
-			var datas = { name: "aName", desc: "aDesc" }; // ...replace this with actually grabbing info from DOM
-			$http({ method: 'POST', url: '/newPromo', data: datas}) 
-				.success( function(data, status, headers, config) {
-					//success!
-				})
-				.error( function(data, status, headers, config) {
-					alert('Woah! submitNewPromo failed!');
-					console.log(data, status);
-				})
-			; // end http
-		};
-
-		// function to submit the form after all validation has occurred			
+	.controller('CreateCtrl', ['$scope', 'PromoService', function($scope, PromoService) {
 		$scope.submitForm = function(isValid) {
-			// check to make sure the form is completely valid
 			if (isValid) {
-				alert('form is valid');
+				PromoService.addPromo("PLACEHOLDER");
 			} else {
 				alert('woah no ways, form is invalid');
+				console.log($scope.promoForm);
 			}
 		};
 		
-	}) // end FormCtrl
+	}]) // end FormCtrl
 	.controller('EditCtrl', ['$scope', '$routeParams', 'PromoService', function($scope, $routeParams, PromoService) {
 		var promoData = PromoService.getPromoById($routeParams.pid);
 		if ( promoData === false ) {
