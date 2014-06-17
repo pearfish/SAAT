@@ -1,16 +1,15 @@
 <h3>Angular!</h3>
 
-
-
-<p>this app demonstrates some simple CRUD, turn your attention to the navbar</p>
+<p>this app demonstrates some simple CRUD, three main pages:</p>
 <ul>
-	<li>
-		view promos: will allow you to get promos on the server (all, by merchant, or by ID), and filter results in ez-pz fashion
-	</li>
-	<li>
-		new promo: will allow you to submit some a new promo, only some are required
-	</li>	
-	
+	<li>view promos</li>
+	<li>new promo</li>
+	<li>edit promo</li>
 </ul>
 
-these are all controlled in the routeProvider in app.config
+<p>
+	enumeration of routes, their templates, and their controllers is handled in routeProvider in app.config<br>
+	each page is pulled from a template HTML file, which contain may contain just plain HTML or minor angular logic<br>
+	the controllers outline simple rules associated with a view, and scope management<br>
+	services/factories are used for more heavy lifting, in this example they're used for handing http requests
+</p>
