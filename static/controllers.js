@@ -26,11 +26,13 @@ angular.module('SAATapp')
 		if ( promoData === false ) {
 			alert('there is no program with this ID');
 		}
-		$scope.old ={
+		
+		$scope.promoData = promoData;
+		
+		$scope.old = { // just doing this to hang on to name/id for subheader
 			name : promoData.name, 
 			id : promoData.pid
-		}
-		$scope.promoData = promoData;
+		} 
 		
 		$scope.submitForm = function(isValid) {
 			if (isValid) {

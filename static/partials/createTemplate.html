@@ -1,11 +1,7 @@
-<!-- PAGE HEADER -->
 <h2>Create New Promotion</h2>
 
-<!-- FORM -->
-<!-- pass in the variable if our form is valid or invalid -->
-<form name="promoForm" ng-submit="submitForm(promoForm.$valid)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+<form name="promoForm" ng-submit="submitForm(promoForm.$valid)" novalidate> 
 
-	<!-- NAME -->
 	<div ng-class="{ 'has-error' : promoForm.name.$invalid && !promoForm.name.$pristine }">
 		<label>Name (required)</label>
 		<input type="text" name="name" id="name" ng-model="promoData.name" ng-required="true">
@@ -38,20 +34,9 @@
 		<input type="date" name="endTime" id="endTime" ng-model="promoData.endTime">
 	</div>
 	
-	<!-- SUBMIT BUTTON -->
 	<button type="submit" class="btn btn-primary">Submit</button>
 	
 </form>
-
-<!--
-{{ (promoData.name.$error==false) + (promoData.username.$error==false)+ (promoData.email.$error==false)   }}
-{{ keys(promoData.$error) }}
-
-<div class="nice round success alert large-10">
-	<span class="meter" style="width: 30%"></span>
-</div>
--->
-
 
 <!--
 	angular's / HTML's attributes for input

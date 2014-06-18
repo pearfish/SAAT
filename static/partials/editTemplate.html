@@ -1,20 +1,20 @@
-<h3> Edit Promotion </h3>
+<!-- this is an almost exact copy of CreateTemplate -->
+<h2> Edit Promotion </h2>
 
 <h5>{{old.id}}:{{old.name}}</h5>
 
+<form name="promoForm" ng-submit="submitForm(promoForm.$valid)" novalidate> 
 
-<form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
-
-	<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+	<div ng-class="{ 'has-error' : promoForm.name.$invalid && !promoForm.name.$pristine }">
 		<label>Name (required)</label>
-		<input type="text" name="name" id="name" ng-model="promoData.name" required>
-		<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+		<input type="text" name="name" id="name" ng-model="promoData.name" ng-required="true">
+		<small ng-show="promoForm.name.$invalid && !promoForm.name.$pristine" class="error">promo name is required.</small>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error' : userForm.mid.$invalid && !userForm.mid.$pristine }">
+	<div ng-class="{ 'has-error' : promoForm.mid.$invalid && !promoForm.mid.$pristine }">
 		<label>Merchant ID (required)</label>
-		<input type="number" name="mid" id="mid" ng-model="promoData.mid" ng-minlength="8">
-		<p ng-show="userForm.mid.$error.minlength" class="help-block">Merchant ID is too short.</p>
+		<input type="text" name="mid" id="mid" ng-model="promoData.mid" ng-minlength="8" ng-required="true">
+		<small ng-show="promoForm.mid.$error.minlength" class="error">Merchant ID is too short.</small>
 	</div>
 	
 	<div class="form-group">	
@@ -33,7 +33,6 @@
 		<label>End Time</label>
 		<input type="date" name="endTime" id="endTime" ng-model="promoData.endTime">
 	</div>
-	<!-- SUBMIT BUTTON -->
-	<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
 	
+	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
