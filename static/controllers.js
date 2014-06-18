@@ -24,9 +24,8 @@ angular.module('SAATapp')
 	.controller('EditCtrl', ['$scope', '$routeParams', 'PromoService', function($scope, $routeParams, PromoService) {
 		var promoData = PromoService.getPromoById($routeParams.pid);
 		if ( promoData === false ) {
-			alert('there is no program with this ID');
+			alert('there is no program with this ID, quit messing with the url');
 		}
-		
 		$scope.promoData = promoData;
 		
 		$scope.old = { // just doing this to hang on to name/id for subheader
@@ -39,6 +38,5 @@ angular.module('SAATapp')
 				PromoService.editPromo(promoData);
 			}
 		}
-		
 	}])
 ; // end module

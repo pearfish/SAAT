@@ -1,35 +1,18 @@
-<div>
-	<button type="button" class="tiny button" ng-click="getPromoData()">populate all promo data</button>
+<button type="button" class="tiny button" ng-click="getPromoData()">populate all promo data</button>
+
+<!-- these inputs are bound to some scope variable so that it can be used for the filter.  These variables aren't declared in the controller or anything, or used anywhere else-->
+<label>filter by name <input type="text" ng-model="testFilter.name"/></label>
+<label>filter by promoid<input type="text" ng-model="testFilter.pid"/></label>
+<table class="table table-striped" style="text-align:left">
+	<tr>	
+		<th>name</th> <th>promo ID</th> <th>description</th> </th> <th>Merch ID</th> <th>creative ID</th> <th>go live date</th> <th>end date</th> 
+	</tr>
 	
-	<!--
-	<input type="text" style="width: 200px; float: right" ng-model="queryMid" placeholder="mid"/>
-	<button type="button" style="float: right" class="tiny button" ng-click="getSpecificPromoData(midQuery)">populate promo data</button>
-	-->
-	
-	<label>filter by name <input type="text" ng-model="testFilter.name"/></label>
-	<label>filter by promoid<input type="text" ng-model="testFilter.pid"/></label>
-	<table class="table table-striped" style="text-align:left">
-		<!--	this doesn't work with promotions with partially unidentified attributes, but leaving it here as a nice example of repeats
-		<tr>	
-			<th ng-repeat="(key, value) in promos[0]"> {{key}} </th> 
-		</tr>
-		
-		<tr ng-repeat="promo in promos | filter: testFilter">	
-			<td ng-repeat="(key, value) in promo"> {{value}} </td>
-			<td><a ng-href="#edit/{{promo.pid}}">edit</a></td>
-		</tr>
-		-->
-		
-		<tr>	
-			<th>name</th> <th>promo ID</th> <th>description</th> </th> <th>Merch ID</th> <th>creative ID</th> <th>go live date</th> <th>end date</th> 
-		</tr>
-		
-		<tr ng-repeat="promo in promos | filter: testFilter">	
-			<td>{{promo.name}}</td> <td>{{promo.pid}}</td> <td>{{promo.desc}}</td> <td>{{promo.mid}}</td> <td>{{promo.cid}}</td> <td>{{promo.goLive}}</td> <td>{{promo.endTime}}</td> <td><a ng-href="#edit/{{promo.pid}}">edit</a></td>
-		</tr>
-		
-		
-	</table>
-	<h6> raw data in $scope.promos:</h6>
-	<p style="width: 500px"> {{promos}} </p>
-</div>
+	<!-- ng-repeat is neat, it works a bit like <xsl:for-each>
+		here, promo is a variable already defined on $scope (the controller puts it there), promo is promos[index] within the repeat -->
+	<tr ng-repeat="promo in promos | filter: testFilter">	
+		<td>{{promo.name}}</td> <td>{{promo.pid}}</td> <td>{{promo.desc}}</td> <td>{{promo.mid}}</td> <td>{{promo.cid}}</td> <td>{{promo.goLive}}</td> <td>{{promo.endTime}}</td> <td><a ng-href="#edit/{{promo.pid}}">edit</a></td>
+	</tr>
+</table>
+<h6> raw data in $scope.promos:</h6>
+<p style="width: 500px"> {{promos}} </p>

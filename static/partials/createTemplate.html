@@ -1,10 +1,17 @@
 <h2>Create New Promotion</h2>
 
+<!-- ng-submit refers to the function called on the submit action, which here can be found in CreateCtrl.
+	promoForm.$valid will resolve to a boolean reflecting the validity of the overall form, which submitForm will check -->
 <form name="promoForm" ng-submit="submitForm(promoForm.$valid)" novalidate> 
-
+	
+	<!-- ng-class : here, it will give this div the 'has-error' class if the conditional is true (tbh I dont think this class is defined anywhere in css, but whatever, example.)-->
 	<div ng-class="{ 'has-error' : promoForm.name.$invalid && !promoForm.name.$pristine }">
 		<label>Name (required)</label>
+		<!-- for all the actual data for this form, we'll use an object promoData, defined on scope.  (so in the controller, it will be referenced as $scope.promoData)
+			we'll define all the inputs as attributes on promoData.  ng-model is how we bind HTML elements to their appropriate data (check the controller for more hints on how it works)-->
 		<input type="text" name="name" id="name" ng-model="promoData.name" ng-required="true">
+		<!-- ng-show will only show the element when it's property resolves to true.  here we use it to show help text if its associated form element is screwy.
+			you can also bind it to a variable on $scope that you manipulate more manually or whatever -->
 		<small ng-show="promoForm.name.$invalid && !promoForm.name.$pristine" class="error">promo name is required.</small>
 	</div>
 
@@ -38,17 +45,25 @@
 	
 </form>
 
-<!--
-	angular's / HTML's attributes for input
+<!--  some additional notes which ~may or may not have~ been lifted straight from angular's docs:
 
-<input
-   ng-model="{ string }"
-   name="{ string }"
-   required
-   ng-required="{ boolean }"
-   ng-minlength="{ number }"
-   ng-maxlength="{ number }"
-   ng-pattern="{ string }"
-   ng-change="{ string }">
-</input>
+	angular's / HTML's attributes for input
+	<input
+	   ng-model="{ string }"
+	   name="{ string }"
+	   required
+	   ng-required="{ boolean }"
+	   ng-minlength="{ number }"
+	   ng-maxlength="{ number }"
+	   ng-pattern="{ string }"
+	   ng-change="{ string }">
+	</input>
+
+	angular's validation properties -
+	
+	$pristine - boolean - True if user has not interacted with the form yet.
+	$dirty - boolean- True if user has already interacted with the form.
+	$valid - boolean - True if all of the containing forms and controls are valid.
+	$invalid - boolean - True if at least one containing control or form is invalid.
+	$error - object - object hash, containing references to all invalid controls or forms
 -->
