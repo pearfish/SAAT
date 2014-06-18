@@ -32,7 +32,7 @@ var localPromos = {
 
 //used for misc. constants
 var serverConfig = {
-	QUERY_LIMIT: 100
+	QUERY_LIMIT: 20
 };
 
 //xian skull has the best quotes 
@@ -121,6 +121,7 @@ app.put('/editPromo', function(req, res){
 				if (req.body.goLive != undefined) { localPromos.promos[i].goLive = req.body.goLive; }
 				if (req.body.endTime != undefined) { localPromos.promos[i].endTime = req.body.endTime; }
 				res.status(200).send('promo '+aCid+' updated');
+				return
 			}
 		}
 	}
@@ -134,6 +135,7 @@ app.get('/getAllPromos', function(req, res){
 	res.status(200).json(localPromos.promos);
 });
 
+//not finished, not used either
 app.get('/getOnePromo', function(req, res){
 	console.log("/getOnePromo called");
 	
@@ -148,6 +150,7 @@ app.get('/getOnePromo', function(req, res){
 	}
 });
 
+//not finished, not used either
 app.get('/getPromoByMer', function(req, res){
 	console.log('/getPromosByMer called');
 	

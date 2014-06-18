@@ -22,7 +22,7 @@ angular.module('SAATapp')
 		
 	}]) // end FormCtrl
 	.controller('EditCtrl', ['$scope', '$routeParams', 'PromoService', function($scope, $routeParams, PromoService) {
-		var promoData = PromoService.getPromoById($routeParams.pid);
+		var promoData = PromoService.getPromoById($routeParams.pid); //we can get the pid from the URL
 		if ( promoData === false ) {
 			alert('there is no program with this ID, quit messing with the url');
 		}

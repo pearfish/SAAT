@@ -1,7 +1,9 @@
 <!-- this is an almost exact copy of CreateTemplate -->
 <h2> Edit Promotion </h2>
 
-<h5>{{old.id}}:{{old.name}}</h5>
+<h5>promotion ID: {{old.id}}</h5>
+<h5>original name: {{old.name}}</h5>
+<h5>merchant ID: {{promoData.mid}}</h5>
 
 <form name="promoForm" ng-submit="submitForm(promoForm.$valid)" novalidate> 
 
@@ -9,12 +11,6 @@
 		<label>Name (required)</label>
 		<input type="text" name="name" id="name" ng-model="promoData.name" ng-required="true">
 		<small ng-show="promoForm.name.$invalid && !promoForm.name.$pristine" class="error">promo name is required.</small>
-	</div>
-
-	<div ng-class="{ 'has-error' : promoForm.mid.$invalid && !promoForm.mid.$pristine }">
-		<label>Merchant ID (required)</label>
-		<input type="text" name="mid" id="mid" ng-model="promoData.mid" ng-minlength="8" ng-required="true">
-		<small ng-show="promoForm.mid.$error.minlength" class="error">Merchant ID is too short.</small>
 	</div>
 	
 	<div class="form-group">	

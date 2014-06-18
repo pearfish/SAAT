@@ -35,7 +35,6 @@ var promoService = angular.module('SAATapp')
             
             // postNewPromo() - handles the dirty work of posting, returns a promise object
             this.postNewPromo = function ( promo ) {
-                console.log(promo);
                 var deferred = q.defer();   
                 
                 $http({   
@@ -56,14 +55,16 @@ var promoService = angular.module('SAATapp')
             
             // editPromo...updates a promo's information.  
             this.editPromo = function( changedPromo ) {  
+                var scope = this;
+                console.log(this);
                 $http({
                     method: 'PUT',
                     url: '/editPromo',
                     data: changedPromo
                 })
                     .success( function(data, status, headers, config) {
-                        var index = PromoService.getPromoIndex(changedPromo.pid);
-                        promoService.promos[index] = changedPromo;
+                        //var index = scope.getPromoIndex(changedPromo.pid);  
+                        //scope.promos[index] = changedPromo;
                         $rootScope.$broadcast( 'promos.update' );
                         alert('program edited succesfully');
                         location.path('/view'); //redirects the app to the /view route, with all the associated changes to url, controller, view, etc
