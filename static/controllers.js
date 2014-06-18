@@ -34,23 +34,9 @@ angular.module('SAATapp')
 		
 		$scope.submitForm = function(isValid) {
 			if (isValid) {
-				//code
+				PromoService.editPromo(promoData);
 			}
 		}
 		
 	}])
-	
 ; // end module
-
-
-/*
-example alternate markup
-var ctrl = [ '$scope', 'Book', function( scope, Book ) {
-	scope.$on( 'books.update', function( event ) {
-		scope.books = Book.books;
-	});
-	scope.books = Book.books;
-}];
- 
-module.controller( "books.list", ctrl );
-*/

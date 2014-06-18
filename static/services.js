@@ -55,6 +55,15 @@ var promoService = angular.module('SAATapp')
                 return promos;
             };
             
+            this.getPromoIndex = function( id ) {
+                for( var i=0 ; i < promos.length ; i++ ){
+                    if ( promos[i].pid == id ) {
+                        return i;
+                    }
+                }
+                return false;
+            };
+            
             this.getPromoById = function( id ) {
                 var result = {};
                 for( var i=0 ; i < promos.length ; i++ ){
@@ -73,18 +82,21 @@ var promoService = angular.module('SAATapp')
                 }
             };
             
-            /*
-            
-            ,
-            editPromo: function: ( changedPromo ) {  
-                $http({ method: 'PUT', url: '/editPromo', data: changedPromo})
+            this.editPromo = function( changedPromo ) {  
+                $http({
+                    method: 'PUT',
+                    url: '/editPromo',
+                    data: changedPromo
+                })
                     .success( function(data, status, headers, config) {
-                        promoService.promos[changedPromo..push( promo );
+                        var index = PromoService.getPromoIndex(changedPromo.pid);
+                        promoService.promos[index] = changedPromo;
                         $rootScope.$broadcast( 'promos.update' );
                     })
-            }
-              
-            */
+                    .error( function(data, status) {
+                        console.log(data, status);
+                    }); //end http
+            };
         }
     ]);
-promoService.$inject = ['$rootScope', '$http'];
+promoService.$inject = ['$rootScope', '$http'];  // pretty sure this is redundant with injection at the beginning

@@ -85,9 +85,6 @@ connection.query('select * from oc_programs ocp join oc_program_details deets wh
 connection.end();
 console.log('server connection closed');
 
-
-/* NEW API */
-
 app.post('/newPromo', function(req, res){
 	console.log('/newPromo called');
 	var tempPromo = {
@@ -110,10 +107,24 @@ app.post('/newPromo', function(req, res){
 	}
 });
 
+//this is really, really, incredibly lazily written. don't judge me.
 app.put('/editPromo', function(req, res){
-    //TODO
-    
-    
+	var aCid = req.body.cid;
+
+	if ( aCid != undefined ) {
+		for( var i=0 ; i<localPromos.promos.length ; i++ ) {
+			if (aCid == localPromos.promos[i].cid) {
+				if (req.body.mid != undefined) { localPromos.promos[i].mid = req.body.mid; }
+				if (req.body.name != undefined) { localPromos.promos[i].name = req.body.name; }
+				if (req.body.desc != undefined) { localPromos.promos[i].desc = req.body.desc; }
+				if (req.body.cid != undefined) { localPromos.promos[i].cid = req.body.cid; }
+				if (req.body.goLive != undefined) { localPromos.promos[i].goLive = req.body.goLive; }
+				if (req.body.endTime != undefined) { localPromos.promos[i].endTime = req.body.endTime; }
+				res.status(200).send('promo '+aCid+' updated');
+			}
+		}
+	}
+	res.status(404).send('promotion not found'); //default
 });
 
 app.get('/getAllPromos', function(req, res){
@@ -159,26 +170,6 @@ app.get('/getQuote', function(req, res){
 	var quote = { quote: xianQuotes[Math.floor((Math.random() * xianQuotes.length) + 1)] };
 	res.status(200).json(quote);
 });
-
-
-
-/* END NEW API */
-
-
-/* OLD API */
-
-app.post('/test', function(req, res, next){
-    res.status(200).send("peachy");
-});
-
-app.get('/specificPromos/:mid', function(req, res, next){
-	console.log("/specificPromos called");
-	res.status(400).send('TODO');
-});
-
-
-
-/* END OLD API */
 
 app.listen(5678);
 console.log("Started server on port 5678");
