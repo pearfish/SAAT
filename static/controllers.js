@@ -39,4 +39,46 @@ angular.module('SAATapp')
 			}
 		}
 	}])
+	.controller('GearCtrl', function($scope){
+		$scope.slots = [
+			//all given exotic stats
+			{
+				name: 'helmet',
+				major: 45,
+				minor: 32,
+				celestial: 20
+			},
+			{
+				name: 'shoulder',
+				major: 34,
+				minor: 24,
+				celestial: 15
+			},
+			{
+				name: 'chest',
+				major: 101,
+				minor: 72,
+				celestial: 45
+			},
+			{
+				name: 'pantaloons',
+				major: 67,
+				minor: 48,
+				celestial: 30
+			},
+			{
+				name: 'hands',
+				major: 34,
+				minor: 24,
+				celestial: 15
+			},
+			{
+				name: 'foot decorations',
+				major: 34,
+				minor: 24,
+				celestial: 15
+			}
+		]
+			
+	})
 ; // end module

@@ -20,6 +20,10 @@ angular.module('SAATapp', [
 			templateUrl: 'partials/editTemplate.html',
 			controller: 'EditCtrl'
 		})
+		.when('/fun', {
+			templateUrl: 'partials/gearTemplate.html',
+			controller: 'GearCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		})
