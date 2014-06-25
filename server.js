@@ -1,5 +1,4 @@
 var express = require('express'),
-	mysql = require('mysql'),
 	app = express();
 
 app.configure(function(){
@@ -10,23 +9,12 @@ app.configure(function(){
 app.use(express.static(__dirname + "/static"));	
 //this is a database no need to inquire deeper
 
-var connection = mysql.createConnection({
-	host     : 'localhost',
-	port	 : 3306,
-	database : 'oncardtest',
-	user     : 'root',
-	password : 'password'
-});
-
 //used to store promos locally
 var localPromos = {
 	timestamp: function(){
 		return Date.now();
 	},
 	promos: [],
-	findPromosByMerchant: function(mid){
-		//return a filtered array of promo objects
-	},
 	promoCount: 3000000
 };
 
@@ -56,34 +44,6 @@ var xianQuotes = [
 	"I could use a hat. A nice hat. With feathers or something. Why don't you buy me a hat? If you were the skull and I was the dopey sword guy walking all over the place, I'd buy you a hat.",
 	"You ever long for the sweet embrace of death, held back from you for so, so terribly long? I ask only to make conversation."
 ];
-
-
-console.log("establishing database connection...");
-connection.connect();
-
-connection.query('select * from oc_programs ocp join oc_program_details deets where ocp.program_ID = deets.program_ID AND MERCHANT_ID =10000481 LIMIT '+serverConfig.QUERY_LIMIT+';', function(err, rows, fields) {
-	if (err) {
-		console.error('WARNING - query failed.  Oh no!  The presentation is ruined!');
-	} else {
-		for( i=0 ; i < rows.length ; i++ ){
-			//map the desired columns to temp object
-			var tempPromo = {
-				mid: rows[i].MERCHANT_ID,
-				pid: rows[i].PROGRAM_ID,
-				name: rows[i].PROGRAM_NAME,
-				desc: rows[i].PROGRAM_SHORT_DESC,
-				cid: rows[i].CREATIVE_ID,
-				goLive: rows[i].GO_LIVE_DATE,
-				endTime: rows[i].END_TIME
-			}
-			localPromos.promos.push(tempPromo);
-		}
-		console.log('fake db created, size='+localPromos.promos.length);
-	}
-});
-
-connection.end();
-console.log('server connection closed');
 
 app.post('/newPromo', function(req, res){
 	console.log('/newPromo called');
