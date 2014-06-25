@@ -1,9 +1,19 @@
 <div id="gearSelect">
     <h3>Slots</h3>
-    <div ng-repeat="slot in slots">{{slot.name}}</div>
+    <select ng-model="selectedGear" ng-options="slot.name for slot in slots">
+        <option value="">-- choose slot --</option>
+    </select>
+    <strong>{{selectedGear.major}}</strong>, {{selectedGear.minor}}
 </div>
 
-<div>
-    
-    
+<div id="setSelect">
+    <h3>Sets</h3>
+    <select ng-model="selectedSet" ng-options="set.name for set in sets">
+        <option value="">-- choose set --</option>
+    </select>
+    <strong>{{selectedSet.major}}</strong>, {{selectedSet.minor1}}, {{selectedSet.minor2}}
 </div>
+
+<button ng-click="selections[selectedGear.name] = selectedSet.name">choose</button>
+
+{{selections}}
